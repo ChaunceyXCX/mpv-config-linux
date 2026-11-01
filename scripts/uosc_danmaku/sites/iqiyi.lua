@@ -13,7 +13,14 @@ local function cleanup_iqiyi_temp(mode)
     local entries = utils.readdir(dir)
     if not entries then return end
     local now = os.time()
-    for name in pairs(entries) do
+    -- [Linux/新版 mpv 修复] utils.readdir 现在返回数组（数字键），旧写法
+    -- `for name in pairs(entries)` 取到的是数字，name:match() 会抛
+    -- "attempt to index local 'name' (a number value)" 并让整个 danmaku 脚本加载失败。
+    local names = {}
+    for k, v in pairs(entries) do
+        names[#names + 1] = type(v) == 'string' and v or tostring(k)
+    end
+    for _, name in ipairs(names) do
         local pid = name:match(TEMP_NAME_PATTERN)
         if pid then
             local full = utils.join_path(dir, name)

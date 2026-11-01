@@ -9,3 +9,5 @@ files/
 playlists/
 
 scripts/webtorrent.js
+# 运行期生成（file_browser 收藏等）
+script-opts/file_browser_favourites.txt

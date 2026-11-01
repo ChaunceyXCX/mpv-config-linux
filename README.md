@@ -1,3 +1,9 @@
+> ### 🐧 Linux 分支：`linux-wayland-niri`
+> 本仓库新增了面向 **Linux + Wayland（niri/DMS）+ NVIDIA** 的改造分支：
+> `gpu-api=vulkan`、`ao=pipewire`、`hwdec=nvdec/vaapi`、`glsl-shaders` 分隔符修正、
+> Windows 专属项全部禁用、附带 `linux/install.sh` 一键部署与 uosc 动态配色。
+> 详见 **[linux/README-linux.md](linux/README-linux.md)**。
+
 ## MPV config ([English branch](https://github.com/dyphire/mpv-config/tree/eng))
 
 ### 项目介绍
