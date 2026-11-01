@@ -1,0 +1,25 @@
+# ── niri 窗口规则（mpv / 投屏）─────────────────────────────────────────
+# 用法：把需要的片段粘到 ~/.config/niri/config.kdl，然后 `niri validate`。
+# 说明：mpv.conf 里的 no-title-bar / window-corners / snap-window 在 Wayland 下无效，
+#       对应能力全部交给合成器，所以这里集中管理窗口外观与投屏行为。
+
+# 普通播放：圆角 + 裁剪（niri 26.x 起支持）
+window-rule {
+    match app-id=r#"^mpv$"#
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+# 投屏接收：macast 调起的 mpv 直接全屏并聚焦
+# （macast 会追加 --fullscreen，这里做双保险，避免被 niri 平铺成半屏）
+window-rule {
+    match app-id=r#"^mpv$"# title=r#".*投屏.*"#
+    open-fullscreen true
+    open-focused true
+}
+
+# 想给播放器"置顶"：niri 无跨列置顶，可让它浮动（浮动层在平铺之上）
+# window-rule {
+#     match app-id=r#"^mpv$"#
+#     open-floating true
+# }
